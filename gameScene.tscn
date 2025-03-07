@@ -1,10 +1,15 @@
-[gd_scene load_steps=11 format=3 uid="uid://d3qyrju3si2vf"]
+[gd_scene load_steps=21 format=3 uid="uid://d3qyrju3si2vf"]
 
-[ext_resource type="Texture2D" uid="uid://lgksd7wfg1bi" path="res://assets/industrial_zone_tileset/2 Background/Background.png" id="1_1v54i"]
 [ext_resource type="Texture2D" uid="uid://mlmnhkld20pb" path="res://assets/flying_dragon-1.1/PNG/144x128/flying_dragon-red.png" id="1_6xvuv"]
 [ext_resource type="Script" path="res://gameGlobalScript.gd" id="1_j14r6"]
 [ext_resource type="Script" path="res://player_control.gd" id="1_s08o0"]
 [ext_resource type="PackedScene" uid="uid://hoy6ptnjey0x" path="res://player_fire.tscn" id="2_7tkb7"]
+[ext_resource type="Texture2D" uid="uid://bu5m22bna6tyh" path="res://assets/industrial_zone_tileset/2 Background/1.png" id="3_juhmb"]
+[ext_resource type="Script" path="res://scroll_all.gd" id="3_vejty"]
+[ext_resource type="Texture2D" uid="uid://1cpsqhm08dj3" path="res://assets/industrial_zone_tileset/2 Background/2.png" id="4_qna7l"]
+[ext_resource type="Texture2D" uid="uid://de31b2q2qyvqo" path="res://assets/industrial_zone_tileset/2 Background/3.png" id="5_ahw5o"]
+[ext_resource type="Texture2D" uid="uid://ck7ylx0tqu1b1" path="res://assets/industrial_zone_tileset/2 Background/4.png" id="6_ef46h"]
+[ext_resource type="Texture2D" uid="uid://d38jwjli0d6qn" path="res://assets/industrial_zone_tileset/2 Background/5.png" id="7_32cmq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3bd28"]
 radius = 19.105
@@ -41,32 +46,117 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w7xl6"]
+size = Vector2(119, 68.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_08q0n"]
+size = Vector2(76.8438, 664.625)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a1bw8"]
+size = Vector2(168.688, 657.125)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a1o1f"]
+size = Vector2(1213.84, 99.25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1sn7p"]
+size = Vector2(1244, 104)
+
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_j14r6")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_1v54i")
+[node name="static_bg" type="Sprite2D" parent="."]
+position = Vector2(5, 3)
+scale = Vector2(2.01234, 2.01389)
+texture = ExtResource("3_juhmb")
+
+[node name="scrolling_bg" type="Node2D" parent="."]
+script = ExtResource("3_vejty")
+
+[node name="Parallax2D4" type="Parallax2D" parent="scrolling_bg"]
+repeat_size = Vector2(1080, 0)
+autoscroll = Vector2(-10, 0)
+repeat_times = 2
+ignore_camera_scroll = true
+
+[node name="Sprite2D" type="Sprite2D" parent="scrolling_bg/Parallax2D4"]
+position = Vector2(5.44446, 2.5)
+scale = Vector2(2.01543, 2.01543)
+texture = ExtResource("4_qna7l")
+
+[node name="Parallax2D3" type="Parallax2D" parent="scrolling_bg"]
+repeat_size = Vector2(1150.95, 0)
+autoscroll = Vector2(-30, 0)
+repeat_times = 2
+ignore_camera_scroll = true
+
+[node name="Sprite2D" type="Sprite2D" parent="scrolling_bg/Parallax2D3"]
+position = Vector2(5.44446, 2.5)
+scale = Vector2(2.01543, 2.01543)
+texture = ExtResource("5_ahw5o")
+
+[node name="Parallax2D2" type="Parallax2D" parent="scrolling_bg"]
+repeat_size = Vector2(1160, 0)
+autoscroll = Vector2(-60, 0)
+repeat_times = 2
+ignore_camera_scroll = true
+
+[node name="Sprite2D" type="Sprite2D" parent="scrolling_bg/Parallax2D2"]
+position = Vector2(5.44446, 2.5)
+scale = Vector2(2.01543, 2.01543)
+texture = ExtResource("6_ef46h")
+
+[node name="Parallax2D" type="Parallax2D" parent="scrolling_bg"]
+repeat_size = Vector2(1150, 0)
+autoscroll = Vector2(-100, 0)
+repeat_times = 2
+ignore_camera_scroll = true
+
+[node name="Sprite2D" type="Sprite2D" parent="scrolling_bg/Parallax2D"]
+position = Vector2(5.44446, 2.5)
+scale = Vector2(2.01543, 2.01543)
+texture = ExtResource("7_32cmq")
 
 [node name="LaserHere" type="Node2D" parent="."]
 
 [node name="player_proj" parent="." instance=ExtResource("2_7tkb7")]
 position = Vector2(-335, -426)
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+[node name="player" type="CharacterBody2D" parent="."]
 motion_mode = 1
 script = ExtResource("1_s08o0")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+[node name="hurtBox" type="CollisionShape2D" parent="player"]
 shape = SubResource("CircleShape2D_3bd28")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="player"]
 sprite_frames = SubResource("SpriteFrames_cx2es")
 autoplay = "default"
 frame_progress = 0.763216
 
-[node name="Marker2D" type="Marker2D" parent="CharacterBody2D"]
+[node name="Marker2D" type="Marker2D" parent="player"]
 position = Vector2(47, 0)
 
-[node name="Timer" type="Timer" parent="CharacterBody2D"]
+[node name="Timer" type="Timer" parent="player"]
+
+[node name="bounding_box" type="CollisionShape2D" parent="player"]
+shape = SubResource("RectangleShape2D_w7xl6")
+
+[node name="bounding" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="bounding"]
+position = Vector2(-614.578, -0.6875)
+shape = SubResource("RectangleShape2D_08q0n")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bounding"]
+position = Vector2(669, 5.4375)
+shape = SubResource("RectangleShape2D_a1bw8")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="bounding"]
+position = Vector2(6.07813, 381)
+shape = SubResource("RectangleShape2D_a1o1f")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="bounding"]
+position = Vector2(1, -375)
+shape = SubResource("RectangleShape2D_1sn7p")

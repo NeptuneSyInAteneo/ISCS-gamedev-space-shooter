@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var player = $CharacterBody2D
+@onready var player = $player
 @onready var player_laser_container = $LaserHere
 
 # Called when the node enters the scene tree for the first time.
