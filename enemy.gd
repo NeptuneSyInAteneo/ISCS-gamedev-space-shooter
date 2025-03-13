@@ -1,8 +1,12 @@
 extends Area2D
 
 @onready var moveT = $moveTime
-@onready var coll = $CollisionShape2D
+@onready var coll = $enemy_hitbox
 @onready var anim = $AnimatedSprite2D
+@onready var bulletContainer = $EnemyBulletsHere
+@onready var muzzle = $muzzle
+
+signal missile_launch(loc)
 
 @export var health = 3
 var speed = 5
@@ -32,6 +36,12 @@ func _on_visible_on_screen_enabler_2d_screen_exited() -> void:
 func _on_move_time_timeout() -> void:
 	# stop a bit
 	is_moving = !is_moving
+	
+	if !is_moving:
+		# flip a coin if it should shoot or not
+		#missile_fire()
+		missile_launch.emit(muzzle.global_position)
+		pass
 	pass # Replace with function body.
 
 
@@ -46,8 +56,7 @@ func _on_area_entered(area: Area2D) -> void:
 	pass # Replace with function body.
 	
 
-
-
 func _on_animated_sprite_2d_animation_finished() -> void:
 	queue_free()
 	pass # Replace with function body.
+	

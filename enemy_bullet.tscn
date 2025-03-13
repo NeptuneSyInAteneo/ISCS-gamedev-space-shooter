@@ -1,0 +1,98 @@
+[gd_scene load_steps=14 format=3 uid="uid://b3hv130nai21v"]
+
+[ext_resource type="Script" path="res://enemy_bullet.gd" id="1_efgdj"]
+[ext_resource type="Texture2D" uid="uid://oxduecu6qqvi" path="res://assets/Game Boy Advance - Metroid Fusion - Missiles FX.png" id="1_ovkha"]
+[ext_resource type="Texture2D" uid="uid://27exfy46jnlp" path="res://assets/explosion3.png" id="2_3nlcp"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qk2r1"]
+radius = 4.0
+height = 26.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iyphy"]
+atlas = ExtResource("2_3nlcp")
+region = Rect2(2, 306, 45, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_akuey"]
+atlas = ExtResource("2_3nlcp")
+region = Rect2(52, 306, 45, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uiuyn"]
+atlas = ExtResource("2_3nlcp")
+region = Rect2(102, 306, 45, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tik3r"]
+atlas = ExtResource("2_3nlcp")
+region = Rect2(152, 306, 45, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fq773"]
+atlas = ExtResource("2_3nlcp")
+region = Rect2(202, 306, 45, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e78qr"]
+atlas = ExtResource("2_3nlcp")
+region = Rect2(252, 306, 45, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x11of"]
+atlas = ExtResource("1_ovkha")
+region = Rect2(8, 0, 26, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m0b1s"]
+atlas = ExtResource("1_ovkha")
+region = Rect2(44, 0, 26, 30)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n8bu8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iyphy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_akuey")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uiuyn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tik3r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fq773")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e78qr")
+}],
+"loop": false,
+"name": &"boom",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x11of")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m0b1s")
+}],
+"loop": true,
+"name": &"default",
+"speed": 20.0
+}]
+
+[node name="enemyBullet" type="Area2D"]
+collision_layer = 8
+collision_mask = 3
+script = ExtResource("1_efgdj")
+
+[node name="bullet_pill" type="CollisionShape2D" parent="."]
+rotation = -1.5708
+shape = SubResource("CapsuleShape2D_qk2r1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_n8bu8")
+autoplay = "default"
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(-1.90735e-06, -3.57628e-07)
+scale = Vector2(4.4, 0.5)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

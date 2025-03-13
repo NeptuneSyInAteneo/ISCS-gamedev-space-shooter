@@ -2,7 +2,7 @@ extends Area2D
 
 @export var speed = 600
 @onready var animatedSprite = $AnimatedSprite2D
-@onready var hitbox = $CollisionShape2D
+@onready var hitbox = $flame_hitbox
 
 func _physics_process(delta):
 	global_position.x += speed * delta 

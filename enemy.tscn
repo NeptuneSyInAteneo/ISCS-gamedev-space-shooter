@@ -128,7 +128,7 @@ radius = 15.1327
 
 [node name="enemy" type="Area2D"]
 collision_layer = 4
-collision_mask = 2
+collision_mask = 3
 script = ExtResource("1_7gb88")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -136,7 +136,7 @@ sprite_frames = SubResource("SpriteFrames_0q0pd")
 animation = &"death"
 autoplay = "default"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="enemy_hitbox" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_qf700")
 
 [node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
@@ -144,6 +144,9 @@ position = Vector2(-54, 0)
 scale = Vector2(12.5, 1)
 
 [node name="moveTime" type="Timer" parent="."]
+
+[node name="muzzle" type="Marker2D" parent="."]
+position = Vector2(-22, 0)
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

@@ -10,9 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://ck7ylx0tqu1b1" path="res://assets/industrial_zone_tileset/2 Background/4.png" id="6_ef46h"]
 [ext_resource type="Texture2D" uid="uid://d38jwjli0d6qn" path="res://assets/industrial_zone_tileset/2 Background/5.png" id="7_32cmq"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_3bd28"]
-radius = 19.105
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_4ryon"]
 atlas = ExtResource("1_6xvuv")
 region = Rect2(0, 128, 144, 128)
@@ -47,6 +44,9 @@ animations = [{
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w7xl6"]
 size = Vector2(119, 68.5)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3bd28"]
+radius = 19.105
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_08q0n"]
 size = Vector2(76.8438, 664.625)
@@ -121,15 +121,13 @@ texture = ExtResource("7_32cmq")
 
 [node name="EnemyHere" type="Node2D" parent="."]
 
+[node name="EnemyBulletsHere" type="Node2D" parent="."]
+
 [node name="player" type="CharacterBody2D" parent="."]
 position = Vector2(-411, 0)
-collision_layer = 8
-collision_mask = 8
+collision_mask = 13
 motion_mode = 1
 script = ExtResource("1_s08o0")
-
-[node name="hurtBox" type="CollisionShape2D" parent="player"]
-shape = SubResource("CircleShape2D_3bd28")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="player"]
 sprite_frames = SubResource("SpriteFrames_cx2es")
@@ -142,9 +140,13 @@ position = Vector2(47, 0)
 [node name="bounding_box" type="CollisionShape2D" parent="player"]
 shape = SubResource("RectangleShape2D_w7xl6")
 
+[node name="hurt" type="Area2D" parent="player"]
+
+[node name="hurtBox" type="CollisionShape2D" parent="player/hurt"]
+shape = SubResource("CircleShape2D_3bd28")
+
 [node name="bounding" type="StaticBody2D" parent="."]
-collision_layer = 8
-collision_mask = 8
+collision_mask = 0
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="bounding"]
 position = Vector2(-614.578, -0.6875)
