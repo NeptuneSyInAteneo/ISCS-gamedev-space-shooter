@@ -41,7 +41,7 @@ func _on_area_entered(area: Area2D) -> void:
 	
 	if health <=0:
 		speed=0
-		coll.set_disabled(true)
+		coll.queue_free()
 		anim.set_animation("death")
 	pass # Replace with function body.
 	
