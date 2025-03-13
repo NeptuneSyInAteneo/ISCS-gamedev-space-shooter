@@ -4,14 +4,12 @@ signal laser_shot(laser, location)
 
 @export var SPEED = 300.0
 @onready var marker = $Marker2D
-@onready var timer = $Timer
 
 var shoot_timer = 0
 
 var laser = preload("res://player_fire.tscn")
 func _ready() -> void:
-	timer.set_one_shot(true)
-	
+	pass
 
 func _physics_process(delta: float) -> void:
 
@@ -39,10 +37,7 @@ func _process(delta):
 		shoot_timer -= delta
 		
 			
-	
-
 	move_and_slide()
 
 func shoot():
-	print("shoot")
 	laser_shot.emit(laser, marker.global_position) #emnits a signal
