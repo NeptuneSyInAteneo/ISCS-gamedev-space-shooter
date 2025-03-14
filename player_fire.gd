@@ -18,6 +18,7 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 
 func _on_area_entered(area: Area2D) -> void:
 	hitbox.queue_free()
+	#hitbox.set_disabled(true)
 	animatedSprite.offset.x = -30
 	animatedSprite.set_animation("explode")
 	speed = 0 

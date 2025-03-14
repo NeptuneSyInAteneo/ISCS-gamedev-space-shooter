@@ -7,6 +7,7 @@ extends Area2D
 @onready var muzzle = $muzzle
 
 signal missile_launch(loc)
+signal player_bump(dmg)
 
 @export var health = 3
 var speed = 5
@@ -46,8 +47,14 @@ func _on_move_time_timeout() -> void:
 
 
 func _on_area_entered(area: Area2D) -> void:
-	print("hit")
-	health-=1
+	if area.name == 'hurt':
+		print("bump")
+		#player_bump.emit(health)
+		health=0
+	
+	elif area.get_parent().name == 'LaserHere':
+		print("hit")
+		health-=1
 	
 	if health <=0:
 		speed=0
