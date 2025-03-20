@@ -11,7 +11,7 @@ var rng = RandomNumberGenerator.new()
 var enemy1 = preload("res://enemy.tscn")
 var missile = preload("res://enemy_bullet.tscn")
 
-var player_health = 1
+var player_health = 10
 var kill_count = 0
 var game_on = true
 
@@ -29,6 +29,11 @@ func _process(delta: float) -> void:
 			$player/bounding_box.queue_free()
 			$player/hurt.queue_free()
 			game_on = false
+	else:
+		
+		if Input.is_action_pressed("reset"):
+			get_tree().reload_current_scene()
+		
 	pass
 
 func on_player_laser_shot(laser_scene, location):
